@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content%}
+<div class="container text-left">
+    {% for honey in honey_list%}
+    <div class="row">
+        <div class="col">
+            <h3>{{ honey.name }}</h3>
+            <div>{{ honey.description }}</div>
+            <br>
+            <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-warning">Více informací</a>
+        </div>
+        <div class="col">
+            <img
+                    class="med-akatovy-pic"
+                    src="{% static 'media/honey_images/med-akatovy.jpg' %}"
+                    alt="Med akátový">
+        </div>
+    </div>
+    <br>
+{% endfor%}
+</div>
+{% endblock%}

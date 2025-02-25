@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content%}
+<!--style="display: flex; justify-content: space-between;-->
+<div class="tv-details-container">
+    {% if is_med_akatovy %}
+    <h3>MED KVĚTOVÝ AKÁTOVÝ</h3>
+    {% endif %}
+
+    {% if is_med_kvetovy %}
+    <h3>MED KVĚTOVÝ</h3>
+    <h5>Med květový (luční)</h5>
+    <div>Med květový, někdy zvaný jako med nektarový, je směs nektaru různých květů, většinou z našich luk CHKO Bílé
+        Karpaty. Jedná se o přírodní koncentrát z květů, většinou světlejší, nazlátlé barvy. Díky své dobré
+        stravitelnosti je vhodný pro děti i starší osoby, obsahuje totiž mnoho jednoduchých cukrů glukózy a fruktózy.
+        Dále obsahuje větší množství pylových zrn, které jej obohacují o bílkoviny, stopové prvky, vitamíny,
+        aminokyseliny a nenasycené mastné kyseliny. Kvůli svému složení brzy krystalizuje.
+    </div>
+    <br>
+    <div>Květový med je zřejmě nejpřirozenějším druhem medu, jelikož obsahuje skutečnou směs všemožných květů bylin, ale
+        i stromů z okolí úlu v radiusu až 3 km.
+    </div>
+    {% endif %}
+</div>
+
+{% endblock%}
