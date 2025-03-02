@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
 from shop.models import (Honey, DeliveryAndPay)
-from shop.views import (BaseView, AboutUsView, HoneyListView, HoneyDetailView, HoneyCreateView)
+from shop.views import (BaseView, AboutUsView, HoneyListView, HoneyDetailView, HoneyCreateView, HoneyDeleteView, HoneyUpdateView)
 
 admin.site.register([Honey, DeliveryAndPay])
 
@@ -28,4 +31,9 @@ urlpatterns = [
     path('medy/', HoneyListView.as_view(), name='honey_list'),
     path('medy/<int:pk>/', HoneyDetailView.as_view(), name='honey_detail'),
     path('medy/vytvorit/', HoneyCreateView.as_view(), name='honey_create'),
+    path('medy/smazat/<int:pk>', HoneyDeleteView.as_view(), name='honey_delete'),
+    path('medy/update/<int:pk>', HoneyUpdateView.as_view(), name='honey_update'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

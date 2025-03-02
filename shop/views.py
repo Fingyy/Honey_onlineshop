@@ -1,10 +1,8 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 
 from shop.forms import HoneyForm
 from shop.models import Honey
-
 
 
 class BaseView(TemplateView):
@@ -42,4 +40,17 @@ class HoneyCreateView(CreateView):
     template_name = 'honey/honey_create.html'
     model = Honey
     form_class = HoneyForm
-    success_url = reverse_lazy('honey/honey_list')
+    success_url = reverse_lazy('honey_list')
+
+
+class HoneyUpdateView(UpdateView):
+    template_name = 'honey/honey_create.html'
+    model = Honey
+    form_class = HoneyForm
+    success_url = reverse_lazy('honey_list')
+
+
+class HoneyDeleteView(DeleteView):
+    template_name = 'honey/honey_delete.html'
+    model = Honey
+    success_url = reverse_lazy('honey_list')

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %} 
+    <p>
+      Jste si jistý, že chcete smazat <strong>"{{ honey.name }}"</strong> z databáze?
+    </p> 
+    <input type="submit" value="Potvrdit" class="btn btn-danger">
+    <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-warning">Zpět</a>
+  </form> 
+{% endblock %}

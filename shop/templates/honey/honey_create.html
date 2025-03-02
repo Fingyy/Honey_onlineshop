@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <label for="{{ form.name.id_for_label }}" class="col-sm-2 col-form-label">Jméno medu:</label>
+            <div class="col-sm-10">
+                {{ form.name.errors }}
+                {{ form.name }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="{{ form.description.id_for_label }}" class="col-sm-2 col-form-label">Popis:</label>
+            <div class="col-sm-10">
+                {{ form.description.errors }}
+                {{ form.description }}
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <label for="{{ form.image.id_for_label }}" class="col-sm-2 col-form-label">Obrázek:</label>
+            <div class="col-sm-10">
+                {{ form.image.errors }}
+                {{ form.image }}
+            </div>
+        </div>
+
+    <input type="submit" value="Potvrdit" class="btn btn-success">
+    </form>
+    {% if honey.pk %}
+      <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-secondary">Zpět</a>
+    {% else %}
+      <a href="{% url 'honey_list' %}" class="btn btn-secondary">Zpět</a>
+    {% endif %}
+{% endblock %}

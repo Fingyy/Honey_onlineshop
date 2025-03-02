@@ -6,6 +6,7 @@
 <div class="tv-details-container">
     {% if is_med_akatovy %}
     <h3>MED KVĚTOVÝ AKÁTOVÝ</h3>
+    <div>doplnit!</div> <!--texty se doplní až budou definované-->
     {% endif %}
 
     {% if is_med_kvetovy %}
@@ -22,6 +23,10 @@
         i stromů z okolí úlu v radiusu až 3 km.
     </div>
     {% endif %}
+    <br>
+    <a href="{% url 'honey_list' %}" class="btn btn-warning">Zpět na seznam medů</a>
+    <a href="{% url 'honey_update' honey.pk %}" class="btn btn-primary">Editovat</a>
+    <a href="{% url 'honey_delete' honey.pk %}" class="btn btn-danger">Smazat</a>
 </div>
 
 {% endblock%}
