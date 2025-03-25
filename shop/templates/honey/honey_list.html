@@ -11,8 +11,10 @@
             <div>{{ honey.description }}</div>
             <br>
             <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-warning">Více informací</a>
-            <a href="{% url 'honey_update' honey.pk %}" class="btn btn-primary">Editovat</a>
-            <a href="{% url 'honey_delete' honey.pk %}" class="btn btn-danger">Smazat</a>
+            {% if user.is_superuser %}
+                <a href="{% url 'honey_update' honey.pk %}" class="btn btn-primary">Editovat</a>
+                <a href="{% url 'honey_delete' honey.pk %}" class="btn btn-danger">Smazat</a>
+            {% endif %}
         </div>
         <!-- Obrazek -->
         <div class="col">

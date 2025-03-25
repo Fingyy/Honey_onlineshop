@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 
@@ -36,21 +38,32 @@ class HoneyDetailView(DetailView):
         return context
 
 
-class HoneyCreateView(CreateView):
+class HoneyCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     template_name = 'honey/honey_create.html'
     model = Honey
     form_class = HoneyForm
     success_url = reverse_lazy('honey_list')
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class HoneyUpdateView(UpdateView):
+
+class HoneyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'honey/honey_create.html'
     model = Honey
     form_class = HoneyForm
     success_url = reverse_lazy('honey_list')
 
+    def test_func(self):
+        if not self.request.user.is_superuser:
+            raise PermissionDenied
+        return True
 
-class HoneyDeleteView(DeleteView):
+
+class HoneyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'honey/honey_delete.html'
     model = Honey
     success_url = reverse_lazy('honey_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser

@@ -25,8 +25,10 @@
     {% endif %}
     <br>
     <a href="{% url 'honey_list' %}" class="btn btn-warning">Zpět na seznam medů</a>
-    <a href="{% url 'honey_update' honey.pk %}" class="btn btn-primary">Editovat</a>
-    <a href="{% url 'honey_delete' honey.pk %}" class="btn btn-danger">Smazat</a>
+    {% if user.is_superuser %}
+                <a href="{% url 'honey_update' honey.pk %}" class="btn btn-primary">Editovat</a>
+                <a href="{% url 'honey_delete' honey.pk %}" class="btn btn-danger">Smazat</a>
+            {% endif %}
 </div>
 
 {% endblock%}
