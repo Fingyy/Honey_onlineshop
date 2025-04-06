@@ -3,8 +3,8 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 
-from shop.forms import HoneyForm
-from shop.models import Honey
+from shop.forms import HoneyForm,HoneyProductOnStockForm, PackagingForm
+from shop.models import Honey, HoneyProductOnStock, Packaging
 
 
 class BaseView(TemplateView):
@@ -63,6 +63,37 @@ class HoneyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class HoneyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'honey/honey_delete.html'
     model = Honey
+    form_class = HoneyForm
+    success_url = reverse_lazy('honey_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class PackagingCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    template_name = 'packaging/packaging_create.html'
+    model = Packaging
+    form_class = PackagingForm
+    success_url = reverse_lazy('honey_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class PackagingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'packaging/packaging_delete.html'
+    model = Packaging
+    form_class = PackagingForm
+    success_url = reverse_lazy('honey_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class HoneyProductOnStockCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    template_name = 'honey_product/honey_prod_create.html'
+    model = HoneyProductOnStock
+    form_class = HoneyProductOnStockForm
     success_url = reverse_lazy('honey_list')
 
     def test_func(self):

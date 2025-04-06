@@ -6,7 +6,7 @@
         {% csrf_token %}
         <div class="row mb-3">
             <label for="{{ form.name.id_for_label }}" class="col-sm-2 col-form-label">Jméno medu:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 {{ form.name.errors }}
                 {{ form.name }}
             </div>
@@ -14,7 +14,7 @@
 
         <div class="row mb-3">
             <label for="{{ form.description.id_for_label }}" class="col-sm-2 col-form-label">Popis:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 {{ form.description.errors }}
                 {{ form.description }}
             </div>
@@ -22,13 +22,13 @@
         
         <div class="row mb-3">
             <label for="{{ form.image.id_for_label }}" class="col-sm-2 col-form-label">Obrázek:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 {{ form.image.errors }}
                 {{ form.image }}
             </div>
         </div>
 
-    <input type="submit" value="Potvrdit" class="btn btn-success">
+    <button type="submit" class="btn btn-success">Potvrdit</button>
     </form>
     {% if honey.pk %}
       <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-secondary">Zpět</a>

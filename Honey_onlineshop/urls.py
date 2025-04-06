@@ -19,10 +19,11 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from shop.models import (Honey, DeliveryAndPay)
-from shop.views import (BaseView, AboutUsView, HoneyListView, HoneyDetailView, HoneyCreateView, HoneyDeleteView, HoneyUpdateView)
+from shop.models import (Honey, HoneyProductOnStock, DeliveryAndPay, Packaging)
+from shop.views import (BaseView, AboutUsView, HoneyListView, HoneyDetailView, HoneyCreateView, HoneyDeleteView,
+                        HoneyUpdateView, HoneyProductOnStockCreateView, PackagingCreateView, PackagingDeleteView)
 
-admin.site.register([Honey, DeliveryAndPay])
+admin.site.register([Honey, HoneyProductOnStock, DeliveryAndPay, Packaging])
 
 urlpatterns = [
     path('', BaseView.as_view(), name='home'),
@@ -33,6 +34,9 @@ urlpatterns = [
     path('medy/vytvorit/', HoneyCreateView.as_view(), name='honey_create'),
     path('medy/smazat/<int:pk>', HoneyDeleteView.as_view(), name='honey_delete'),
     path('medy/update/<int:pk>', HoneyUpdateView.as_view(), name='honey_update'),
+    path('med-produkt/vytvorit/', HoneyProductOnStockCreateView.as_view(), name='honey_prod_create'),
+    path('baleni/vytvorit/', PackagingCreateView.as_view(), name='packaging_create'),
+    path('baleni/smazat/<int:pk>', PackagingDeleteView.as_view(), name='packaging_delete'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %} 
+    <p>
+      Jste si jistý, že chcete smazat type balení <strong>"{{ packaging.name }}"</strong> z databáze?
+    </p>
+      <button type="submit" class="btn btn-primary">Potvrdit</button>
+      <button type="button" class="btn btn-secondary"
+                onclick="history.length > 1 ? history.back() : window.location.href='/'">Zpět</button>
+  </form> 
+{% endblock %}

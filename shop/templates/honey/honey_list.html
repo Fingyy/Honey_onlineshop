@@ -33,5 +33,9 @@
     </div>
     <br>
 {% endfor%}
+    {% if user.is_superuser%}
+    <a href=" {% url 'honey_create' %}" class="btn btn-success">Přidat med</a>
+    <a href=" {% url 'honey_prod_create' %}" class="btn btn-success">Přidat produkt</a>
+    {% endif %}
 </div>
 {% endblock%}

@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -8,6 +9,22 @@ class Honey(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Packaging(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class HoneyProductOnStock(models.Model):
+    honey_name = models.ForeignKey(Honey, on_delete=models.CASCADE)
+    honey_packaging = models.ForeignKey(Packaging, on_delete=models.CASCADE)
+    quantity = models.IntegerField(validators=[MinValueValidator(0)])
+
+    def __str__(self):
+        return f'{self.honey_name} - {self.honey_packaging.name}'
 
 
 class DeliveryAndPay(models.Model):
