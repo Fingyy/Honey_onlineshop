@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h2>Seznam položek na skladě</h2>
+    <ol>
+        {% for item in items_on_stock %}
+            <li>
+                <div>Položka "{{ item }}" je v počtu {{ item.quantity }} ks</div>
+                <a href="{% url 'honey_detail' item.honey_name.pk  %}" class="btn btn-info">Detail</a>
+                <a href="{% url 'stock_prod_update' item.pk %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'stock_prod_delete' item.pk  %}" class="btn btn-danger">Smazat</a>
+            </li>
+        {% endfor %}
+    </ol>
+    <a href="{% url 'stock_prod_create' %}" class="btn btn-success">Přidat položku</a>
+{% endblock %}

@@ -4,7 +4,7 @@
   <form method="post">
     {% csrf_token %} 
     <p>
-      Jste si jistý, že chcete smazat type balení <strong>"{{ packaging.name }}"</strong> z databáze?
+      Jste si jistý, že chcete smazat type balení <strong>"{{ packaging.name }}"</strong> z databáze {{ packaging.id }}?
     </p>
       <button type="submit" class="btn btn-primary">Potvrdit</button>
       <button type="button" class="btn btn-secondary"

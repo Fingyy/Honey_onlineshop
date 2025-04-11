@@ -23,6 +23,13 @@ class HoneyProductOnStock(models.Model):
     honey_packaging = models.ForeignKey(Packaging, on_delete=models.CASCADE)
     quantity = models.IntegerField(validators=[MinValueValidator(0)])
 
+    """UniqueConstraint zajistí, že do Modelu nepřidám stejnou položku 2x (je to bezpečnost na úrovni databáze)"""
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['honey_name'], name='unique_product')
+        ]
+
     def __str__(self):
         return f'{self.honey_name} - {self.honey_packaging.name}'
 

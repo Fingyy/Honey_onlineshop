@@ -63,7 +63,6 @@ class HoneyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class HoneyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'honey/honey_delete.html'
     model = Honey
-    form_class = HoneyForm
     success_url = reverse_lazy('honey_list')
 
     def test_func(self):
@@ -71,6 +70,16 @@ class HoneyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 class PackagingCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    template_name = 'packaging/packaging_create.html'
+    model = Packaging
+    form_class = PackagingForm
+    success_url = reverse_lazy('honey_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class PackingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'packaging/packaging_create.html'
     model = Packaging
     form_class = PackagingForm
@@ -91,7 +100,36 @@ class PackagingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 class HoneyProductOnStockCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    template_name = 'honey_product/honey_prod_create.html'
+    template_name = 'product_in_stock/prod_in_stock_create.html'
+    model = HoneyProductOnStock
+    form_class = HoneyProductOnStockForm
+    success_url = reverse_lazy('honey_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class HoneyProductOnStockListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    template_name = 'product_in_stock/prod_in_stock_list.html'
+    model = HoneyProductOnStock
+    context_object_name = 'items_on_stock'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class HoneyProductOnStockUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    template_name = 'product_in_stock/prod_in_stock_create.html'
+    model = HoneyProductOnStock
+    form_class = HoneyProductOnStockForm
+    success_url = reverse_lazy('honey_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class HoneyProductOnStockDeleteView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    template_name = 'product_in_stock/prod_in_stock_delete.html'
     model = HoneyProductOnStock
     form_class = HoneyProductOnStockForm
     success_url = reverse_lazy('honey_list')
