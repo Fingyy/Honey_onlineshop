@@ -7,6 +7,7 @@
       Jste si jistý, že chcete smazat <strong>"{{ honey.name }}"</strong> z databáze?
     </p> 
     <input type="submit" value="Potvrdit" class="btn btn-danger">
-    <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-warning">Zpět</a>
+      {% url 'honey_detail' honey.pk as honey_detail_url %} {# {%%} do {{}} nedostanu, proto pomoci as prevedu #}
+    <a href="{{ request.GET.next|default:honey_detail_url }}" class="btn btn-warning">Zpět</a>
   </form> 
 {% endblock %}

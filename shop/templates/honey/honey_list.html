@@ -10,10 +10,10 @@
             <h3>{{ honey.name }}</h3>
             <div>{{ honey.description }}</div>
             <br>
-            <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-warning">Více informací</a>
+            <a href="{% url 'honey_detail' honey.pk %}?next={{ request.get_full_path }}" class="btn btn-warning">Více informací</a>
             {% if user.is_superuser %}
-                <a href="{% url 'honey_update' honey.pk %}" class="btn btn-primary">Editovat</a>
-                <a href="{% url 'honey_delete' honey.pk %}" class="btn btn-danger">Smazat</a>
+                <a href="{% url 'honey_update' honey.pk %}?next={{ request.get_full_path }}" class="btn btn-primary">Editovat</a>
+                <a href="{% url 'honey_delete' honey.pk %}?next={{ request.get_full_path }}" class="btn btn-danger">Smazat</a>
             {% endif %}
         </div>
         <!-- Obrazek -->
@@ -35,7 +35,7 @@
 {% endfor%}
     {% if user.is_superuser %}
     <a href=" {% url 'honey_create' %}" class="btn btn-success">Přidat med</a>
-    <a href=" {% url 'stock_prod_create' %}" class="btn btn-success">Přidat produkt</a>
+    <a href=" {% url 'stock_prod_create' %}?next={{ request.get_full_path }}" class="btn btn-success">Přidat produkt</a>
     {% endif %}
 </div>
 {% endblock%}

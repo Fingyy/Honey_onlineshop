@@ -7,9 +7,9 @@
         {% for item in items_on_stock %}
             <li>
                 <div>Položka "{{ item }}" je v počtu {{ item.quantity }} ks</div>
-                <a href="{% url 'honey_detail' item.honey_name.pk  %}" class="btn btn-info">Detail</a>
-                <a href="{% url 'stock_prod_update' item.pk %}" class="btn btn-warning">Edit</a>
-                <a href="{% url 'stock_prod_delete' item.pk  %}" class="btn btn-danger">Smazat</a>
+                <a href="{% url 'honey_detail' item.honey_name.pk %}?next={{ request.get_full_path }}" class="btn btn-info">Detail</a>
+                <a href="{% url 'stock_prod_update' item.pk %}?next={{ request.get_full_path }}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'stock_prod_delete' item.pk %}?next={{ request.get_full_path }}" class="btn btn-danger">Smazat</a>
             </li>
         {% endfor %}
     </ol>

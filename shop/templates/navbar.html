@@ -1,4 +1,7 @@
 {% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 <nav class="navbar navbar-expand-lg bg-body-tertiary custom-navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">Domů</a>
@@ -23,7 +26,7 @@
             {% if user.is_superuser %}
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'stock_prod_list' %}">Sklad</a>
-            </li>}
+            </li>
             {% endif %}
 
         <li class="nav-item dropdown">
@@ -42,9 +45,10 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Hledat" aria-label="Search">
+        <input class="form-control me-2 searching" type="search" placeholder="Napiště, co chcete hledat" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Hledat</button>
       </form>
+        </div>
     </div>
   </div>
 </nav>

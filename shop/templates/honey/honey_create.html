@@ -27,12 +27,16 @@
                 {{ form.image }}
             </div>
         </div>
+        <!-- Skryté pole pro next -->
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
 
     <button type="submit" class="btn btn-success">Potvrdit</button>
     </form>
     {% if honey.pk %}
-      <a href="{% url 'honey_detail' honey.pk %}" class="btn btn-secondary">Zpět</a>
+        {% url 'honey_detail' honey.pk as honey_detail_url %}
+        <a href="{{ request.GET.next|default:honey_detail_url }}" class="btn btn-secondary">Zpět</a>
     {% else %}
-      <a href="{% url 'honey_list' %}" class="btn btn-secondary">Zpět</a>
+        {% url 'honey_list' as honey_list_url %}
+        <a href="{{ request.GET.next|default:honey_list_url }}" class="btn btn-secondary">Zpět</a>
     {% endif %}
 {% endblock %}

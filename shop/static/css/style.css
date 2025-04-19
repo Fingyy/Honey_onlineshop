@@ -5,3 +5,7 @@
 .honey-image {
   width: 250px;
 }
+
+.searching { /* v navbaru se nenastavuje správně šířka pro vyhledávání*/
+  width: 400px;
+}
