@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+import uuid
 
 
 class Honey(models.Model):
@@ -40,3 +41,17 @@ class DeliveryAndPay(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Order(models.Model):
+
+    order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    honey = models.ManyToManyField(Honey)
+    order_date = models.DateTimeField(auto_now_add=True)
+    price = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    address = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    zipcode = models.CharField(max_length=20, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
