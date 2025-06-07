@@ -4,132 +4,171 @@
 {% block title %}Včelařství Jaroščák & Toman{% endblock %}
 
 {% block content %}
-    <p>Hello!</p>
     <style>
-.card-container {
-    perspective: 1000px;
-    margin: 20px;
-}
+        .card-container {
+            perspective: 1000px;
+            margin: 20px;
+        }
 
-.flip-card {
-    width: 100%;
-    aspect-ratio: 7 / 4; /* poměr šířky k výšce */
-    position: relative;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-}
+        .flip-card {
+            display: block;
+            width: 100%; /* roztáhne kartu na celou šířku sloupce */
+            max-width: 100%;
+            aspect-ratio: 7 / 4; /* poměr šířky k výšce */
+            position: relative;
+            transition: transform 0.6s; /* čas, za který se karta otočí */
+            transform-style: preserve-3d;
+            perspective: 1000px; /* hloubka 3D perspektivy pro rotaci */
+            min-height: 1px; /* Fix pro kolaps výšky */
+        }
 
-.flip-card:hover {
-    transform: rotateY(180deg);
-}
+        .flip-card-inner {
+            position: relative; /* umožní absolutní pozicování vnořených vrstev (front, back) */
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d; /* zachová 3D efekt při rotaci */
+            transition: transform 0.6s; /* plynulá animace při otočení */
+        }
 
-.card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden; /* schová neaktivní stranu */
-    border-radius: 10px;
-    overflow: hidden; /* zajistí, že nic nepřeteče přes okraj */
-    object-fit: contain; /* obrázek se přizpůsobí v celku, aniž by se ořezal */
-}
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg); /* otočí celý vnitřek o 180 stupňů, čímž zobrazí zadní stranu */
+        }
 
-.card-front {
-  background-image: url('https://via.placeholder.com/300x200');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  {#align-items: flex-end;#}
-  {#padding: 1em;#}
-  color: white;
-  font-weight: bold;
-}
+        .card-face {
+            position: absolute; /* obě strany (front i back) se překrývají ve stejné pozici */
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* schová neaktivní stranu */
+            border-radius: 10px; /* zakulacené rohy */
+            overflow: hidden; /* zajistí, že nic nepřeteče přes okraj */
+            object-fit: contain; /* obrázek se přizpůsobí v celku, aniž by se ořezal */
+        }
 
-.card-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+        .card-front, .card-back {
+            display: flex; /* zarovná obsah */
+            align-items: center; /* vertikálně na střed */
+            justify-content: center; /* horizontálně na střed */
+        }
 
-.card-back {
-  background-color: #F1C232;
-  transform: rotateY(180deg);
-  {#padding: 1em;#}
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
+        .card-front {
+            background-image: url('https://via.placeholder.com/300x200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-weight: bold;
+            position: relative; /* aby se text mohl absolutně pozicovat vůči této vrstvě */
+        }
 
-ul li a.cta-link { /* nemám zde jen cta-link, abych uvedl konkretni cestu, v mem pripade lez pouzit i samostatně */
-  display: inline-block;
-  margin-top: 2em; /* posouvám vzdálenost linku od seznamu */
-  font-weight: bold;
-  text-decoration: underline;
-  color: #000;
-}
+        .card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* zachová obrázek přes celou plochu, bez deformace */
+        }
 
-.no-bullet {
-  list-style: none;
-}
+        .card-front-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Georgia', serif;
+            font-size: 2.8em;
+            color: white;
+        {#text-shadow: 0 0 5px rgba(0,0,0,0.7); /* aby byl text čitelný i na světlém podkladu */#} pointer-events: none; /* text nebude bránit hover efektu */
+            z-index: 2;
+        }
+
+        .card-back {
+            background-color: #F1C232;
+            transform: rotateY(180deg);
+        }
+
+        ul li a.cta-link { /* nemám zde jen cta-link, abych uvedl konkretni cestu, v mem pripade lez pouzit i samostatně */
+            display: inline-block;
+            margin-top: 2em; /* posouvám vzdálenost linku od seznamu */
+            font-weight: bold;
+            text-decoration: underline;
+            color: #000;
+        }
+
+        .no-bullet {
+            list-style: none; /* vypne odrážku u listu */
+        }
+
+        .uvodni-pozdrav {
+        {#font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;#} font-size: 2em;
+        }
+    </style>
 
 
-</style>
+    <div class="uvodni-pozdrav">Vítejte na webových stránkách Včelařství Jaroščák & Toman</div>
+    <div class="card-container container">
+        <div class="row g-3"> <!-- nastavení mezery mezi sloupci -->
 
-<div class="card-container container">
-    <div class="row g-3"> <!-- nastavení mezery mezi sloupci -->
-
-        <div class="col-md-4">
-              <div class="flip-card">
-                  <div class="card-face card-front">
-                      <img src="{% static 'media/honey_images/propolis.png' %}" alt="Chybějící obrázek propolisu">
-                  </div>
-                  <div class="card-face card-back">
-                      <ul>
-                          <li>Tinktury z propolisu</li>
-                          <li>Masti z propolisu</li>
-                          <li>Spreje z propolisu</li>
-                          <li class="no-bullet">
-                              <a href="{% url 'honey_list' %}" class="cta-link">Zobrazit nabídku</a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-        </div>
-
-    <div class="col-md-4">
-        <div class="flip-card">
-            <div class="card-face card-front">
-                <img src="{% static 'media/honey_images/medovina.jpg' %}" alt="Chybějící obrázek medoviny">
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <img src="{% static 'media/honey_images/propolis.png' %}" alt="Chybějící obrázek propolisu">
+                            <div class="card-front-title">Propolis</div>
+                        </div>
+                        <div class="card-face card-back">
+                            <ul>
+                                <li>Tinktury z propolisu</li>
+                                <li>Masti z propolisu</li>
+                                <li>Spreje z propolisu</li>
+                                <li class="no-bullet">
+                                    <a href="{% url 'honey_list' %}" class="cta-link">Zobrazit nabídku</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-face card-back">
-                <ul>
-                    <li>Medovina</li>
-                    <li class="no-bullet">
-                        <a href="{% url 'honey_list' %}" class="cta-link">Zobrazit nabídku</a>
-                    </li>
-                </ul>
+
+            <div class="col-md-4">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <img src="{% static 'media/honey_images/medovina.jpg' %}" alt="Chybějící obrázek medoviny">
+                            <div class="card-front-title">Medovina</div>
+                        </div>
+                        <div class="card-face card-back">
+                            <ul>
+                                <li>Medovina</li>
+                                <li class="no-bullet">
+                                    <a href="{% url 'honey_list' %}" class="cta-link">Zobrazit nabídku</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-inner">
+                            <div class="card-face card-front">
+                                <img src="{% static 'media/honey_images/oddelky.jpg' %}"
+                                     alt="Chybějící obrázek oddělků">
+                                <div class="card-front-title">Oddělky</div>
+                            </div>
+                            <div class="card-face card-back">
+                                <ul>
+                                    <li>Oddělky</li>
+                                    <li>Vyzimovaná včelstva</li>
+                                    <li class="no-bullet">
+                                        <a href="{% url 'honey_list' %}" class="cta-link">Zobrazit nabídku</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-
-    <div class="col-md-4">
-      <div class="flip-card">
-          <div class="card-face card-front">
-              <img src="{% static 'media/honey_images/oddelky.jpg' %}" alt="Chybějící obrázek oddělků">
-          </div>
-          <div class="card-face card-back">
-              <ul>
-                  <li>Oddělky</li>
-                  <li>Vyzimovaná včelstva</li>
-                  <li class="no-bullet">
-                              <a href="{% url 'honey_list' %}" class="cta-link">Zobrazit nabídku</a>
-                  </li>
-              </ul>
-          </div>
-      </div>
-    </div>
-
-    </div>
-</div>
 
 {% endblock %}
+
