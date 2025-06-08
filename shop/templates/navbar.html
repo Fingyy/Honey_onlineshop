@@ -2,54 +2,92 @@
 <head>
     <title>{% block title %}Včelařství Jaroščák & Toman{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Link pro přidávání ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<style>
+    .icon-bar {
+        width: 60px; /* Set a specific width */
+    }
+
+    .icon-bar a {
+        display: block; /* Make the links appear below each other instead of side-by-side */
+        text-align: center; /* Center-align text */
+        padding: 4px; /* Add some padding */
+        transition: all 0.3s ease; /* Add transition for hover effects */
+        color: black; /* barva ikonky*/
+        font-size: 28px; /* Increased font-size */
+    }
+
+    .icon-bar a:hover,
+    .navbar .nav-link:hover {
+        background-color: transparent;
+        box-shadow: inset 0 -2px 0 black;
+    }
+
+
+</style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary custom-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">Domů</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- nový wrapper pro ikonku + odkazy -->
+        <div class="collapse navbar-collapse">
 
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'about_us' %}">O nás</a>
-            </li>
+            <div class="d-flex align-items-center mx-auto gap-3">
+                <div class="icon-bar">
+                    <a class="active" href="{% url 'home' %}"><i class="fa fa-home"></i></a>
+                </div>
 
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'honey_list' %}">Nabídka medů</a>
-            </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Oddělky a vyzimovaná včelstva</a>
-             </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'about_us' %}">O nás</a>
+                    </li>
 
-            {% if user.is_superuser %}
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'stock_prod_list' %}">Sklad</a>
-            </li>
-            {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'honey_list' %}">Nabídka medů</a>
+                    </li>
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Včelařské potřeby
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Rámečky</a></li>
-                <li><a class="dropdown-item" href="#">Výroba úlů</a></li>
-                <li><a class="dropdown-item" href="#">Výroba nástavků</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Výroba styrodurových plemenáčů</a></li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-        </ul>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2 searching" type="search" placeholder="Napiště, co chcete hledáte" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Hledat</button>
-        </form>
-    </div>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Oddělky a vyzimovaná včelstva</a>
+                    </li>
+
+                    {% if user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'stock_prod_list' %}">Sklad</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Včelařské potřeby
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Rámečky</a></li>
+                            <li><a class="dropdown-item" href="#">Výroba úlů</a></li>
+                            <li><a class="dropdown-item" href="#">Výroba nástavků</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Výroba styrodurových plemenáčů</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <!-- Připraveno pro rozšíření o hledání-->
+                {#        <form class="d-flex" role="search">#}
+                {#            <input class="form-control me-2 searching" type="search" placeholder="Napiště, co chcete hledáte" aria-label="Search">#}
+                {#            <button class="btn btn-outline-success" type="submit">Hledat</button>#}
+                {#        </form>#}
+            </div>
+
+        </div>
     </div>
 </nav>
